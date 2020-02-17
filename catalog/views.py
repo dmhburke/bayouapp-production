@@ -17,7 +17,7 @@ from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm
 # Add tour name
 tour_name = 'The Bayou Bonanza'
 # Add Location and Date details
-location_date = 'New Orleans, April 20-22'
+location_date = 'New Orleans, March 20-22'
 # Calculations to format title
 title_list = tour_name.split()
 first_part = title_list[0:2]
