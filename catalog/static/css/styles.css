@@ -476,6 +476,39 @@ a:link {
   background-position: 40% 20%;
 }
 
+#landingpageButtonPlayer {
+  background-color: white;
+  background-image:
+  linear-gradient(170deg,
+    var(--fadeColorMain),
+    var(--fadeColorHighlight)),
+  url(https://bayoubonanza-production.s3.us-east-2.amazonaws.com/OtherAssets/playerDetails.jpg);
+  background-size: cover;
+  background-position: 50% 30%;
+}
+
+#landingpageButtonPoints {
+  background-color: white;
+  background-image:
+  linear-gradient(170deg,
+    var(--fadeColorMain),
+    var(--fadeColorHighlight)),
+  url(https://bayoubonanza-production.s3.us-east-2.amazonaws.com/OtherAssets/pointsImage.jpg);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+#landingpageButtonMap {
+  background-color: white;
+  background-image:
+  linear-gradient(170deg,
+    var(--fadeColorMain),
+    var(--fadeColorHighlight)),
+  url(https://bayoubonanza-production.s3.us-east-2.amazonaws.com/OtherAssets/mapDetails.jpg);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
 #landingpageIconContainer {
   height: 62%;
   width: 100%;
