@@ -2345,51 +2345,49 @@ class SportsTippingScoreModel(models.Model):
     class Meta:
         ordering = ['-total', 'time']
 
-class FridaySocialModel(models.Model):
-    name = models.ForeignKey('PlayerModel',on_delete = models.CASCADE)
-    password = models.CharField(max_length=30, blank=True, null=True)
-    best = models.ForeignKey('PlayerModel',related_name='fri_best', on_delete = models.CASCADE)
-    honorable = models.ForeignKey('PlayerModel',related_name='fri_honorable',on_delete = models.CASCADE)
+class Input_TourDetailsModel(models.Model):
+    tour_name = models.CharField(max_length=200, blank=True, null=True)
+    points_link = models.CharField(max_length=200, blank=True, null=True)
+    map_link = models.CharField(max_length=200, blank=True, null=True)
 
-class SaturdaySocialModel(models.Model):
-    name = models.ForeignKey('PlayerModel',on_delete = models.CASCADE)
-    password = models.CharField(max_length=30, blank=True, null=True)
-    best = models.ForeignKey('PlayerModel',related_name='sat_best', on_delete = models.CASCADE)
-    honorable = models.ForeignKey('PlayerModel',related_name='sat_honorable',on_delete = models.CASCADE)
-
-class TourAgendaModel(models.Model):
-    day = models.CharField(max_length=10,choices=DAYS,blank=True, null=True)
-    number = models.IntegerField(blank=True, null=True)
-    time = models.CharField(max_length=40,blank=True, null=True)
-    event = models.CharField(max_length=40,blank=True, null=True)
-    location = models.CharField(max_length=40,blank=True, null=True)
-    instructions = models.TextField(blank=True, null=True)
-    total_points = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        ordering = ['number']
-
-class TopGolfModel(models.Model):
-    reference = models.CharField(max_length=20, default="reference", blank=True, null=True)
-    first = models.ForeignKey('PlayerModel',related_name='firstTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-    second = models.ForeignKey('PlayerModel',related_name='secondTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-    third = models.ForeignKey('PlayerModel',related_name='thirdTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-    fourth = models.ForeignKey('PlayerModel',related_name='fourthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-    fifth = models.ForeignKey('PlayerModel',related_name='fifthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-    sixth = models.ForeignKey('PlayerModel',related_name='sixthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
-
-class RacingModel(models.Model):
-    reference = models.CharField(max_length=20, default="reference", blank=True, null=True)
-    first = models.ForeignKey('PlayerModel',related_name='firstRacing', on_delete = models.CASCADE, blank=True, null=True)
-    second = models.ForeignKey('PlayerModel',related_name='secondRacing', on_delete = models.CASCADE, blank=True, null=True)
-    third = models.ForeignKey('PlayerModel',related_name='thirdRacing', on_delete = models.CASCADE, blank=True, null=True)
-    fourth = models.ForeignKey('PlayerModel',related_name='fourthRacing', on_delete = models.CASCADE, blank=True, null=True)
-    fifth = models.ForeignKey('PlayerModel',related_name='fifthRacing', on_delete = models.CASCADE, blank=True, null=True)
-    sixth = models.ForeignKey('PlayerModel',related_name='sixthRacing', on_delete = models.CASCADE, blank=True, null=True)
-
-
-
-#testmodel - DELETE WHEN RUNNING
-class testmodel(models.Model):
- """Add description explaining what model does"""
- homecity = models.CharField(max_length=30, blank=True, null=True)
+# class FridaySocialModel(models.Model):
+#     name = models.ForeignKey('PlayerModel',on_delete = models.CASCADE)
+#     password = models.CharField(max_length=30, blank=True, null=True)
+#     best = models.ForeignKey('PlayerModel',related_name='fri_best', on_delete = models.CASCADE)
+#     honorable = models.ForeignKey('PlayerModel',related_name='fri_honorable',on_delete = models.CASCADE)
+#
+# class SaturdaySocialModel(models.Model):
+#     name = models.ForeignKey('PlayerModel',on_delete = models.CASCADE)
+#     password = models.CharField(max_length=30, blank=True, null=True)
+#     best = models.ForeignKey('PlayerModel',related_name='sat_best', on_delete = models.CASCADE)
+#     honorable = models.ForeignKey('PlayerModel',related_name='sat_honorable',on_delete = models.CASCADE)
+#
+# class TourAgendaModel(models.Model):
+#     day = models.CharField(max_length=10,choices=DAYS,blank=True, null=True)
+#     number = models.IntegerField(blank=True, null=True)
+#     time = models.CharField(max_length=40,blank=True, null=True)
+#     event = models.CharField(max_length=40,blank=True, null=True)
+#     location = models.CharField(max_length=40,blank=True, null=True)
+#     instructions = models.TextField(blank=True, null=True)
+#     total_points = models.IntegerField(blank=True, null=True)
+#
+#     class Meta:
+#         ordering = ['number']
+#
+# class TopGolfModel(models.Model):
+#     reference = models.CharField(max_length=20, default="reference", blank=True, null=True)
+#     first = models.ForeignKey('PlayerModel',related_name='firstTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#     second = models.ForeignKey('PlayerModel',related_name='secondTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#     third = models.ForeignKey('PlayerModel',related_name='thirdTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#     fourth = models.ForeignKey('PlayerModel',related_name='fourthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#     fifth = models.ForeignKey('PlayerModel',related_name='fifthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#     sixth = models.ForeignKey('PlayerModel',related_name='sixthTopGolf', on_delete = models.CASCADE, blank=True, null=True)
+#
+# class RacingModel(models.Model):
+#     reference = models.CharField(max_length=20, default="reference", blank=True, null=True)
+#     first = models.ForeignKey('PlayerModel',related_name='firstRacing', on_delete = models.CASCADE, blank=True, null=True)
+#     second = models.ForeignKey('PlayerModel',related_name='secondRacing', on_delete = models.CASCADE, blank=True, null=True)
+#     third = models.ForeignKey('PlayerModel',related_name='thirdRacing', on_delete = models.CASCADE, blank=True, null=True)
+#     fourth = models.ForeignKey('PlayerModel',related_name='fourthRacing', on_delete = models.CASCADE, blank=True, null=True)
+#     fifth = models.ForeignKey('PlayerModel',related_name='fifthRacing', on_delete = models.CASCADE, blank=True, null=True)
+#     sixth = models.ForeignKey('PlayerModel',related_name='sixthRacing', on_delete = models.CASCADE, blank=True, null=True)

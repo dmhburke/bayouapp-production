@@ -6,10 +6,10 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 #--- IMPORT MODELS HERE ---
-from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel,SportsTippingResultsModel, SportsTippingScoreModel, FridaySocialModel, TourAgendaModel, TopGolfModel, RacingModel
+from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel,SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel
 
 #--- IMPORT FORMS HERE ---
-from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm, SportsTippingForm, FridaySocialForm, SaturdaySocialForm
+from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm, SportsTippingForm
 
 #--- ADD KEY DETAILS HERE ---
 
@@ -77,7 +77,15 @@ def scoringpage (request):
 def tourdetails(request):
     """Landing page for tour details"""
 
-    context = {}
+    try:
+        map_link = Input_TourDetailsModel.objects.get(tour_name=tour_name).map_link
+    except:
+        map_link = ""
+
+    context = {
+        'map_link': map_link,
+
+    }
 
     return render(request, 'tourDetails.html', context=context)
 
@@ -707,17 +715,23 @@ def tourplayers(request):
 ## - Tour agenda
 def touragenda(request):
     """Landing page for tour details"""
-    active_events = TourAgendaModel.objects.order_by('number')
-    friday_events = TourAgendaModel.objects.all().filter(day='FRIDAY')
-    saturday_events = TourAgendaModel.objects.all().filter(day='SATURDAY')
-    sunday_events = TourAgendaModel.objects.all().filter(day='SUNDAY')
+    # active_events = TourAgendaModel.objects.order_by('number')
+    # friday_events = TourAgendaModel.objects.all().filter(day='FRIDAY')
+    # saturday_events = TourAgendaModel.objects.all().filter(day='SATURDAY')
+    # sunday_events = TourAgendaModel.objects.all().filter(day='SUNDAY')
+
+    try:
+        points_link = Input_TourDetailsModel.objects.get(tour_name=tour_name).points_link
+    except:
+         points_link = ""
 
     context = {
         'tour_name': tour_name,
-        'active_events': active_events,
-        'friday_events': friday_events,
-        'saturday_events': saturday_events,
-        'sunday_events': sunday_events,
+        'points_link': points_link,
+        # 'active_events': active_events,
+        # 'friday_events': friday_events,
+        # 'saturday_events': saturday_events,
+        # 'sunday_events': sunday_events,
         }
 
     return render(request, 'tourAgenda.html', context=context)

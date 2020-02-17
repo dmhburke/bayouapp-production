@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd1EnduranceModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel, SportsTippingResultsModel, SportsTippingScoreModel, FridaySocialModel, SaturdaySocialModel, TourAgendaModel, TopGolfModel, RacingModel
+from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd1EnduranceModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel, SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel
 
 # Define new admin class - PLAYER
 class PlayerModelAdmin(admin.ModelAdmin):
@@ -193,53 +193,60 @@ class SportsTippingScoreModelAdmin(admin.ModelAdmin):
 #Register admin class
 admin.site.register(SportsTippingScoreModel, SportsTippingScoreModelAdmin)
 
-#Define new admin class - FRIDAY SOCIAL
-class FridaySocialModelAdmin(admin.ModelAdmin):
-     list_display = ('name', 'password', 'best', 'honorable',)
+#Define new admin class - ENTRIES FOR EVENT DETAILS
+class Input_TourDetailsModelAdmin(admin.ModelAdmin):
+    list_display = ('points_link', 'map_link',)
 
 #Register admin class
-admin.site.register(FridaySocialModel, FridaySocialModelAdmin)
+admin.site.register(Input_TourDetailsModel, Input_TourDetailsModelAdmin)
 
-#Define new admin class - SATURDAY SOCIAL
-class SaturdaySocialModelAdmin(admin.ModelAdmin):
-     list_display = ('name', 'password', 'best', 'honorable',)
-
-#Register admin class
-admin.site.register(SaturdaySocialModel, SaturdaySocialModelAdmin)
-
-#Define new admin class - TOUR EVENTS
-class TourAgendaModelAdmin(admin.ModelAdmin):
-     list_display = ('day', 'time', 'event', 'number',)
-     ordering = ('number',)
-
-#Register admin class
-admin.site.register(TourAgendaModel, TourAgendaModelAdmin)
-
-#Define new admin class - TOP GOLF
-class TopGolfModelAdmin(admin.ModelAdmin):
-     list_display = ('reference', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth',)
-
-#Register admin class
-admin.site.register(TopGolfModel, TopGolfModelAdmin)
-
-
-#Define new admin class - RACING
-class RacingModelAdmin(admin.ModelAdmin):
-     list_display = ('reference', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth',)
-
-#Register admin class
-admin.site.register(RacingModel, RacingModelAdmin)
-
-
-
-##### DELETE WHEN RUNNING
-
-# Register your models here.
-from catalog.models import testmodel
-
-# Define the new admin class
-class testmodelAdmin(admin.ModelAdmin):
-    list_display = ('homecity',)
-
-# Register the admin class with the associated model
-admin.site.register(testmodel, testmodelAdmin)
+# #Define new admin class - FRIDAY SOCIAL
+# class FridaySocialModelAdmin(admin.ModelAdmin):
+#      list_display = ('name', 'password', 'best', 'honorable',)
+#
+# #Register admin class
+# admin.site.register(FridaySocialModel, FridaySocialModelAdmin)
+#
+# #Define new admin class - SATURDAY SOCIAL
+# class SaturdaySocialModelAdmin(admin.ModelAdmin):
+#      list_display = ('name', 'password', 'best', 'honorable',)
+#
+# #Register admin class
+# admin.site.register(SaturdaySocialModel, SaturdaySocialModelAdmin)
+#
+# #Define new admin class - TOUR EVENTS
+# class TourAgendaModelAdmin(admin.ModelAdmin):
+#      list_display = ('day', 'time', 'event', 'number',)
+#      ordering = ('number',)
+#
+# #Register admin class
+# admin.site.register(TourAgendaModel, TourAgendaModelAdmin)
+#
+# #Define new admin class - TOP GOLF
+# class TopGolfModelAdmin(admin.ModelAdmin):
+#      list_display = ('reference', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth',)
+#
+# #Register admin class
+# admin.site.register(TopGolfModel, TopGolfModelAdmin)
+#
+#
+# #Define new admin class - RACING
+# class RacingModelAdmin(admin.ModelAdmin):
+#      list_display = ('reference', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth',)
+#
+# #Register admin class
+# admin.site.register(RacingModel, RacingModelAdmin)
+#
+#
+#
+# ##### DELETE WHEN RUNNING
+#
+# # Register your models here.
+# from catalog.models import testmodel
+#
+# # Define the new admin class
+# class testmodelAdmin(admin.ModelAdmin):
+#     list_display = ('homecity',)
+#
+# # Register the admin class with the associated model
+# admin.site.register(testmodel, testmodelAdmin)
