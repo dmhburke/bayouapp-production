@@ -1,0 +1,16 @@
+{% extends "_baseGolfApp.html" %}
+
+{% block content %}
+{% load static %}
+
+<div id="fullscreenScrollContainer">
+
+<div class="bigShadow" id="playerTile" style="height: 500px">
+  <div id="playerTileHeader">
+    <div id="playerIndyHeader">{{tour_name}}</div>
+    <div id="playerSubHeader">Tour points</div></div>
+    <img style="margin-left: 15px; margin-top: 25px; width: 90%;" src="https://duelinthedesert-production.s3.us-east-2.amazonaws.com/PointsSummary1.png">
+  </div>
+  </div>
+
+{% endblock %}
