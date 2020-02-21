@@ -291,6 +291,12 @@ def leaderboard_update(sender, **kwargs):
 
 ##########
 
+## -- ADMIN_HOLE_DETAILS
+class AdminHoleDetails(models.Model):
+    roundNum = models.IntegerField(primary_key=True)
+    courseName = models.CharField(max_length=100,blank=True, null=True)
+    tussleName = models.CharField(max_length=100,blank=True, null=True)
+    scorecardLink = models.CharField(max_length=200,blank=True, null=True)
 
 ## -- START ROUND 1 -- ##
 class Rd1HoleModel(models.Model):

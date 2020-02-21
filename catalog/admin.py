@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd1EnduranceModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel, SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel
+from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd1EnduranceModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel, SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel, AdminHoleDetails
 
 # Define new admin class - PLAYER
 class PlayerModelAdmin(admin.ModelAdmin):
@@ -199,6 +199,13 @@ class Input_TourDetailsModelAdmin(admin.ModelAdmin):
 
 #Register admin class
 admin.site.register(Input_TourDetailsModel, Input_TourDetailsModelAdmin)
+
+#Define new admin class - HOLE ADMIN DETAILS
+class AdminHoleDetailsAdmin(admin.ModelAdmin):
+    list_display = ('roundNum', 'courseName',)
+
+#Register admin class
+admin.site.register(AdminHoleDetails, AdminHoleDetailsAdmin)
 
 # #Define new admin class - FRIDAY SOCIAL
 # class FridaySocialModelAdmin(admin.ModelAdmin):

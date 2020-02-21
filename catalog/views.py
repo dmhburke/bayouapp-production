@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 #--- IMPORT MODELS HERE ---
-from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel,SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel
+from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel,SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel, AdminHoleDetails
 
 #--- IMPORT FORMS HERE ---
 from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm, SportsTippingForm
@@ -104,6 +104,12 @@ class rd1holelist (generic.ListView):
         ld_hole = Rd1HoleModel.objects.filter(LD__gt=0)
         tussle_hole = Rd1HoleModel.objects.filter(tussle__isnull=False)
 
+        try:
+            scorecard_link = AdminHoleDetails.objects.get(roundNum=1).scorecardLink
+        except:
+            scorecard_link = ""
+
+        context['scorecard_link'] = scorecard_link
         context['ctp_hole'] = ctp_hole
         context['ld_hole'] = ld_hole
         return context
@@ -269,6 +275,12 @@ class rd2holelist (generic.ListView):
         ctp_hole = Rd2HoleModel.objects.filter(CTP__gt=0)
         ld_hole = Rd2HoleModel.objects.filter(LD__gt=0)
         tussle_hole = Rd2HoleModel.objects.filter(tussle__isnull=False)
+        try:
+            scorecard_link = AdminHoleDetails.objects.get(roundNum=2).scorecardLink
+        except:
+            scorecard_link = ""
+
+        context['scorecard_link'] = scorecard_link
 
         context['ctp_hole'] = ctp_hole
         context['ld_hole'] = ld_hole
@@ -431,6 +443,12 @@ class rd3holelist (generic.ListView):
         ctp_hole = Rd3HoleModel.objects.filter(CTP__gt=0)
         ld_hole = Rd3HoleModel.objects.filter(LD__gt=0)
         tussle_hole = Rd3HoleModel.objects.filter(tussle__isnull=False)
+        try:
+            scorecard_link = AdminHoleDetails.objects.get(roundNum=3).scorecardLink
+        except:
+            scorecard_link = ""
+
+        context['scorecard_link'] = scorecard_link
 
         context['ctp_hole'] = ctp_hole
         context['ld_hole'] = ld_hole
