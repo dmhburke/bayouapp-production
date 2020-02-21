@@ -124,7 +124,10 @@ def rd1holedetail(request,pk):
     hole_ld = Rd1HoleModel.objects.get(pk=pk).LD
     selected_hole = Rd1HoleModel.objects.get(number=pk)
     hole_tussle = Rd1HoleModel.objects.get(pk=pk).tussle
-
+    try:
+        tussle_name = AdminHoleDetails.objects.get(roundNum=1).tussleName
+    except:
+        tussle_name = ""
 
     #Count active players for dynamic loading
     active_players = Rd1SlotModel.objects.filter(player_name__isnull=False).count()
@@ -240,6 +243,7 @@ def rd1holedetail(request,pk):
         'hole_ctp': hole_ctp,
         'hole_ld': hole_ld,
         'hole_tussle': hole_tussle,
+        'tussle_name': tussle_name,
         }
 
     return render(request, 'rd1HoleDetail.html', context=context)
@@ -296,6 +300,10 @@ def rd2holedetail(request,pk):
     hole_ld = Rd2HoleModel.objects.get(pk=pk).LD
     selected_hole = Rd2HoleModel.objects.get(number=pk)
     hole_tussle = Rd1HoleModel.objects.get(pk=pk).tussle
+    try:
+        tussle_name = AdminHoleDetails.objects.get(roundNum=2).tussleName
+    except:
+        tussle_name = ""
 
     #Count active players for dynamic loading
     active_players = Rd2SlotModel.objects.filter(player_name__isnull=False).count()
@@ -411,6 +419,7 @@ def rd2holedetail(request,pk):
         'hole_ctp': hole_ctp,
         'hole_ld': hole_ld,
         'hole_tussle': hole_tussle,
+        'tussle_name': tussle_name,
         }
 
     return render(request, 'rd2HoleDetail.html', context=context)
@@ -464,7 +473,10 @@ def rd3holedetail(request,pk):
     hole_ld = Rd3HoleModel.objects.get(pk=pk).LD
     selected_hole = Rd3HoleModel.objects.get(number=pk)
     hole_tussle = Rd1HoleModel.objects.get(pk=pk).tussle
-
+    try:
+        tussle_name = AdminHoleDetails.objects.get(roundNum=3).tussleName
+    except:
+        tussle_name = ""
 
     #Count active players for dynamic loading
     active_players = Rd3SlotModel.objects.filter(player_name__isnull=False).count()
@@ -580,6 +592,7 @@ def rd3holedetail(request,pk):
         'hole_ctp': hole_ctp,
         'hole_ld': hole_ld,
         'hole_tussle': hole_tussle,
+        'tussle_name': tussle_name,
         }
 
     return render(request, 'rd3HoleDetail.html', context=context)
