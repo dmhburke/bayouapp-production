@@ -718,7 +718,7 @@ a:link {
   line-height: 18px;
   text-align: center;
   font-size: var(--fontSizeHeader2);
-  /* font-family: var(--brandFont); */
+  font-family: var(--brandFont);
 }
 
 /* #scorespageButtonRd1 {
@@ -2281,7 +2281,7 @@ input[type=number]::-webkit-outer-spin-button {
   position: absolute;
   bottom: 0px;
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   background-color: #F8C145;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
