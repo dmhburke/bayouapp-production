@@ -717,7 +717,7 @@ a:link {
   width: 100%;
   line-height: 18px;
   text-align: center;
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader3);
   font-family: var(--brandFont);
 }
 
@@ -1330,8 +1330,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 #leaderboardBackIcon {
   position: relative;
-  top: 5px;
-  height: 70%;
+  top: 0px;
+  left: 0px;
+  height: 50%;
 
 }
 
@@ -1372,7 +1373,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 60px;
   color: var(--brandColorHighlight2);
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader1);
+  font-size: var(--fontSizeHeader2);
 }
 
 #tipFormDescText {
@@ -1413,7 +1414,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-left: 4px;
   font-family: var(--brandFont);
   color: var(--brandColorMain);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
 }
 
 #tippingPassword {
@@ -1422,7 +1423,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-left: 4px;
   font-family: var(--brandFont);
   color: var(--brandColorMain);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
 }
 
 #leftNameInput {
@@ -1440,7 +1441,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   text-align-last: center;
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
   text-transform: uppercase;
   color: var(--brandColorMain);
 }
@@ -1452,7 +1453,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   text-align: center;
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
   text-transform: uppercase;
   color: var(--brandColorMain);
 }
@@ -1521,7 +1522,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-top: 3px;
   color: var(--brandColorMain);
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
   font-weight: bold;
 
 }
@@ -1603,13 +1604,20 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: var(--brandColorHighlight2);
 }
 
+#tipsSubmitIcon {
+  height: 70%;
+  width: 70%;
+  margin-left: -5px;
+  margin-top: 2px;
+}
+
 #id_game1, #id_game2, #id_game3, #id_game4, #id_game5, #id_game6, #id_game7, #id_game8, #id_game9, #id_game10 {
   border: 0;
   -webkit-appearance: none;
   background: none;
   text-align-last: center;
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader2);
+  font-size: var(--fontSizeHeader4);
   text-transform: uppercase;
   color: var(--brandColorMain);
   width: 160px;
@@ -1890,7 +1898,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 45px;
   text-align: center;
   font-family: var(--brandFont);
-  color: var(--brandFontMain);
+  color: var(--brandColorHighlight1);
   background-color: var(--brandColorHighlight3);
   border: 2px solid var(--brandColorMain);
 }
@@ -2554,7 +2562,7 @@ input[type=number]::-webkit-outer-spin-button {
   top: 15px;
   font-family: var(--brandFont);
   color: var(--brandColorMain);
-  font-size: var(--fontSizeHeader1);
+  font-size: var(--fontSizeHeader3);
 
 }
 
@@ -2588,7 +2596,7 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: var(--brandColorHighlight2);
   color: var(--brandColorMain);
   font-family: var(--brandFont);
-  font-size: var(--fontSizeHeader1);
+  font-size: var(--fontSizeHeader2);
 
 }
 
@@ -2626,7 +2634,7 @@ input[type=number]::-webkit-outer-spin-button {
   border: 2px solid var(--brandColorHighlight2);
   font-family: var(--brandFont);
   color: var(--brandColorHighlight2);
-  font-size: var(--fontSizeHeader1);
+  font-size: var(--fontSizeHeader2);
 
 }
 
