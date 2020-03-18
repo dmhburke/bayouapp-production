@@ -9,7 +9,7 @@ from django.dispatch import receiver
 from catalog.models import PlayerModel, Rd1HoleModel, Rd1SlotModel, Rd1ScoreModel, Rd1StablefordModel, Rd2HoleModel, Rd2SlotModel, Rd2ScoreModel, Rd2StablefordModel, Rd3HoleModel, Rd3SlotModel, Rd3ScoreModel, Rd3StablefordModel, Rd4HoleModel, Rd4SlotModel, Rd4ScoreModel, Rd4StablefordModel, EventEntryModel, LeaderBoardModel, SportsTippingModel,SportsTippingResultsModel, SportsTippingScoreModel, Input_TourDetailsModel, AdminHoleDetails
 
 #--- IMPORT FORMS HERE ---
-from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm, SportsTippingForm
+from catalog.forms import Rd1ScoreForm, Rd2ScoreForm, Rd3ScoreForm, Rd4ScoreForm, SportsTippingForm, MatchReportForm
 
 #--- ADD KEY DETAILS HERE ---
 
@@ -628,6 +628,7 @@ def entertips(request):
         form = SportsTippingForm()
 
     context = {
+        'tour_name': tour_name,
         'form': form,
         }
 
@@ -1073,3 +1074,250 @@ def playerdetail (request,name):
     }
 
     return render(request, 'playerDetail.html', context=context)
+
+
+def matchreports(request):
+    """View results and generate match reports including text to speech file"""
+
+#SET ROUND USING FORM
+    print("ROUNDNUMBER")
+    round_number = {}
+    polly_voice = {}
+
+    if request.method =='POST':
+         form = MatchReportForm(request.POST)
+         if form.is_valid():
+             round_number = form.round_select(request).roundNum
+             polly_voice = form.voice_select(request)
+    else:
+          form = MatchReportForm()
+
+    print(round_number)
+
+## ERROR HANDLING IF NO ROUND DETAILS SELECTED
+    try:
+        if round_number == 1:
+            select_slot_model = Rd1SlotModel
+            select_score_model = Rd1ScoreModel
+            select_hole_model = Rd1HoleModel
+        elif round_number == 2:
+            select_slot_model = Rd2SlotModel
+            select_score_model = Rd2ScoreModel
+            select_hole_model = Rd2HoleModel
+        elif round_number == 3:
+            select_slot_model = Rd3SlotModel
+            select_score_model = Rd3ScoreModel
+            select_hole_model = Rd3HoleModel
+        # else:
+        #     select_slot_model = Rd3SlotModel
+        #     select_score_model = Rd3ScoreModel
+        #     select_hole_model = Rd3HoleModel
+
+    # GET ROUND SCORE DETAILS (looped in html template)
+        round_details = select_slot_model.objects.filter(player_holesplayed__gt=0).order_by('-player_rankscore')
+
+    # CTP DETAILS
+    #Create list of CTP holes selected when creating round
+        ctp_holes = []
+        hole_details = select_hole_model.objects.filter(CTP__gt=0)
+        for ctp in hole_details:
+            ctp_holes.append(ctp.number)
+
+    #Create list of CTP holes in play in selected round
+        ctp_details = select_score_model.objects.all()
+
+        ctp_inplay = []
+        for hole in ctp_details:
+            ctp_inplay.append(hole.hole.number)
+
+    #Match winners to selected holes
+        ctp_winners = []
+        for hole in ctp_details:
+            for ctp in ctp_holes:
+                if hole.hole.number == ctp:
+                    try:
+                        ctp_winners.append(select_score_model.objects.get(hole=hole.hole.number).ctp.name)
+                    except:
+                        ctp_winners.append("No winner")
+
+        print(ctp_holes)
+        print(ctp_winners)
+
+        zipped_ctp = list(zip(ctp_holes, ctp_winners))
+
+    # LD DETAILS
+    #Create list of LD holes selected when creating round
+        ld_holes = []
+        hole_details = select_hole_model.objects.filter(LD__gt=0)
+        for ld in hole_details:
+            ld_holes.append(ld.number)
+
+    #Create list of LD holes in play in selected round
+        ld_details = select_score_model.objects.all()
+
+        ld_inplay = []
+        for hole in ld_details:
+            ld_inplay.append(hole.hole.number)
+
+    #Match winners to selected holes
+        ld_winners = []
+        for hole in ld_details:
+            for ld in ld_holes:
+                if hole.hole.number == ld:
+                    try:
+                        ld_winners.append(select_score_model.objects.get(hole=hole.hole.number).ld.name)
+                    except:
+                        ld_winners.append("No-one")
+
+        print(ld_holes)
+        print(ld_winners)
+
+        zipped_ld = list(zip(ld_holes, ld_winners))
+
+    # Get tussle winner
+        tussle_results = select_slot_model.objects.filter(player_name__isnull=False).order_by('-tussle_score', 'player_score')
+
+    # GENERATE MATCH REPORT TEXT
+        import random
+        adjective_list = ['saucy', 'sizzling', 'breathtaking']
+        active_verb_list = ['monstered', 'obliterated']
+        old_saying_list = ['Stone the Crows', 'Sweet Jesus']
+        animals_list = ['dogs', 'cats', 'rhinos', 'giraffes']
+        event_list = ['dinner date', 'dentist appointment']
+        golf_saying_list = ['Drive for show, putt for dough', 'Got to be in it to win it']
+        adverb_list = ['cheerily', 'idiotically', 'non-sensically', 'sulkily']
+
+
+        player_list = []
+        active_players = PlayerModel.objects.all()
+        for player in active_players:
+            player_list.append(player.name)
+
+        random_adjective1 = random.choice(adjective_list)
+        random_player1 = random.choice(player_list)
+        random_old_saying1 = random.choice(old_saying_list)
+        random_animals1 = random.choice(animals_list)
+        random_event1 = random.choice(event_list)
+        active_verb1 = random.choice(active_verb_list)
+        random_player2 = random.choice(player_list)
+        golf_saying1 = random.choice(golf_saying_list)
+        adverb1 = random.choice(adverb_list)
+
+        try:
+            ld_winner1 = ld_winners[0]
+            ld_hole1 = ld_holes[0]
+        except:
+            ld_winner1 = "no-one"
+            ld_hole1 = "-"
+
+        #Report text
+        report_text = """
+            Welcome to the Match Report for round {}.
+
+            The day's play could really be summed up in just one word: {}.
+
+            As {} was heard to exclaim as he topped another seven iron at the driving range pre-round: '{}, it's going to be {} out there today!'
+
+            And {} it was. From the first tee shot to the last putt, the players jostled for leaderboard dominance like a group of {} late to a {}.
+
+            But just as in the animal kingdom, it wasn't long before a pack leader presented himself, this time in the form of {}, who stepped up to the tee on hole {} and {} his drive up the fairway to take out the first longest drive prize of the day.
+
+            '{}' said {}, {}, as he watched the ball disappear into the distance.
+        """.format(
+            round_number,
+            random_adjective1,
+            random_player1,
+            random_old_saying1,
+            random_adjective1,
+            random_adjective1,
+            random_animals1,
+            random_event1,
+            ld_winner1,
+            ld_hole1,
+            active_verb1,
+            golf_saying1,
+            random_player2,
+            adverb1
+            )
+
+##RESULTS IF NO ROUND DETAILS SELECTED
+    except:
+        round_details = None
+        zipped_ctp = None
+        zipped_ld = None
+        tussle_results = None
+        report_text = None
+        polly_voice = "Amy"
+
+    request.session['polly_voice'] = polly_voice
+    request.session['report_text'] = report_text
+    request.session['round_number'] = round_number
+
+    context = {
+        'form': form,
+        'round_details': round_details,
+        'zipped_ctp': zipped_ctp,
+        'zipped_ld': zipped_ld,
+        'tussle_results': tussle_results,
+        'report_text': report_text,
+        # 'ctp_holes': ctp_holes,
+        # 'ctp_winners': ctp_winners,
+        # 'player_1': player_1,
+        # 'ctp_1': ctp_1,
+    }
+
+    return render(request, 'matchreports.html', context=context)
+
+def matchreportsfile(request):
+
+    polly_voice = request.session['polly_voice']
+    report_text = request.session['report_text']
+    round_number = request.session['round_number']
+
+    import boto3
+    from botocore.exceptions import BotoCoreError, ClientError
+    from contextlib import closing
+    import os
+    import sys
+    import subprocess
+    from tempfile import gettempdir
+
+    # Define session
+    polly_client = boto3.Session().client('polly',region_name='us-east-1')
+
+    # Function to create audio file
+    def createReport(text, round_number, voice):
+        #Define Polly synthesize_speech request
+        response = polly_client.synthesize_speech(
+                        VoiceId=polly_voice,
+                        OutputFormat='mp3',
+                        Text = text,
+                        Engine='standard')
+
+        #Create and save audio file
+        filename = 'RoundReport-' + str(round_number) + '-' + voice
+        file = open(filename, 'wb')
+        file.write(response['AudioStream'].read())
+        file.close()
+
+        from os import environ as CONFIG
+        AWS_ACCESS_KEY_ID = CONFIG['AWS_ACCESS_KEY_ID']
+        AWS_SECRET_ACCESS_KEY = CONFIG['AWS_SECRET_ACCESS_KEY']
+        AWS_STORAGE_BUCKET_NAME = CONFIG['AWS_STORAGE_BUCKET_NAME']
+
+        s3_filename = filename + '.mp3'
+
+        s3_client = boto3.client('s3')
+        try:
+            response = s3_client.upload_file(filename, AWS_STORAGE_BUCKET_NAME, s3_filename)
+        except ClientError as e:
+            logging.error(e)
+            return False
+        return True
+
+# CALL CREATE REPORT FUNCTION TO GENERATE REPORT
+    createReport(report_text, round_number, polly_voice)
+
+    context={}
+
+    return render(request, 'matchreportsfile.html', context=context)

@@ -1,8 +1,8 @@
 from django import forms
 from catalog.choices import *
 from django.forms.widgets import TextInput
-from django.forms import ModelForm
-from catalog.models import Rd1ScoreModel, Rd1SlotModel, PlayerModel, SportsTippingModel, Rd2ScoreModel, Rd2SlotModel, Rd3ScoreModel, Rd3SlotModel, Rd4ScoreModel, Rd4SlotModel
+from django.forms import ModelForm, ModelChoiceField
+from catalog.models import Rd1ScoreModel, Rd1SlotModel, PlayerModel, SportsTippingModel, Rd2ScoreModel, Rd2SlotModel, Rd3ScoreModel, Rd3SlotModel, Rd4ScoreModel, Rd4SlotModel, AdminHoleDetails
 
 class MyTelephoneInput(TextInput):
         input_type = 'tel'
@@ -168,6 +168,23 @@ class SportsTippingForm(ModelForm):
         class Meta:
                 model = SportsTippingModel
                 fields = ('name', 'password', 'game1', 'game2', 'game3', 'game4', 'game5', 'game6', 'game7', 'game8', 'game9', 'game10',)
+
+# DEFINE USERMODELCHOICEFIELD TO CALL CHOICES FROM OTHER MODELS
+class UserModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+         return obj.roundNum
+
+class MatchReportForm(forms.Form):
+    report_round = UserModelChoiceField(queryset=AdminHoleDetails.objects.all(), empty_label='Select Round', required=True)
+    polly_name = forms.ChoiceField(choices=VOICE_CHOICES, required=True)
+
+    def round_select(self,request):
+        roundSelect = self.cleaned_data['report_round']
+        return roundSelect
+
+    def voice_select(self,request):
+        voiceSelect = self.cleaned_data['polly_name']
+        return voiceSelect
 
 # class FridaySocialForm(ModelForm):
 #         name = forms.ModelChoiceField(queryset=PlayerModel.objects.all(), empty_label='Your name', required=True)

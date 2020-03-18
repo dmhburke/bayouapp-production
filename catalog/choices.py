@@ -30,7 +30,7 @@ DAYS = (
     ("SUNDAY", "Sunday"),
     )
 
-#TIPPING INPUT
+#TIPPING_SETUP
 GAME_1 = (
     ("", "Select result"),
     ("NETS", "Nets"),
@@ -155,4 +155,19 @@ GAME_10R = (
     ("NOT_COMPLETE", "No result"),
     ("MIAMI", "Miami"),
     ("FLORIDA_STATE", "Florida State"),
+    )
+
+VOICE_CHOICES = (
+    ('Amy', 'Amy (UK)'),
+    ('Emma', 'Emma (UK)'),
+    ('Joey', 'Joey (US)'),
+    ('Kendra', 'Kendra (US)'),
+    ('Nicole', 'Nicole (Aussie)'),
+    ('Russell', 'Russell (Aussie)'),
+    ('Geraint', 'Geraint (Welsh)'),
+    ('Mathieu', 'Mathieu (French)'),
+    ('Karl', 'Karl (Icelandic)'),
+    ('Liv', 'Liv (Norwegian)'),
+    ('Astrid', 'Astrid (Swedish)'),
+    ('Miguel', 'Miguel (Mexican)'),
     )

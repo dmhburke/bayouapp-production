@@ -36,6 +36,9 @@ urlpatterns = [
     path('touragenda/', views.touragenda, name='touragenda'),
     # PLAYER DETAILS
     path('player/<name>', views.playerdetail, name='playerdetail'),
+    # MATCH REPORTS
+    path('matchreports', views.matchreports, name='matchreports'),
+    path('matchreportsfile', views.matchreportsfile, name='matchreportsfile'),
 
     ]
 

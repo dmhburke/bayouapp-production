@@ -1020,13 +1020,17 @@ a:link {
 .playerName {
   display: inline-block;
   vertical-align: middle;
-  width: 150px;
+  width: 180px;
   height: 100%;
   line-height: 55px;
   margin-left: 15px;
   color: var(--brandColorMain);
   font-family: var(--brandFont);
   font-size: var(--fontSizeHeader3);
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 
 }
 
@@ -2686,6 +2690,18 @@ input[type=number]::-webkit-outer-spin-button {
   top: 71px;
 }
 
+#showMatchReportButton {
+  height: 30px;
+  line-height: 30px;
+  color: white;
+  background-color: var(--brandColorMain);
+}
+
+#matchReportContainer {
+  width: 95%;
+  margin: 0px auto;
+  display: none;
+}
 
 
 /*DESKTOP RESPONSIVE*/
